@@ -1,0 +1,236 @@
+package miniproject;
+import java.io.IOException;
+import java.util.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+
+
+public class BookMain {
+	  ArrayList<Book> list = new ArrayList<Book>();
+	  Scanner sc = new Scanner(System.in);
+	  
+	BookMain(){
+		list.add(new Book(67890356,"The Interpretation of Dreams","Sigmund Freud","English",250,4.4f));
+		list.add(new Book(34567786,"Three Act Tragedy","Christie Agatha","English",311,4.2f));
+		list.add(new Book(56789435,"Sherlock Holmes Series","Arthur Conan Doyle","English",900,4.8f));
+		list.add(new Book(34567812,"Chaawa","Shivaji Sawant","Marathi",400,4.8f));
+		list.add(new Book(23452345,"Premchand Ki Shreshth Kahaniyan"," Krishna   Sobti","Hindi",200,3.00f));
+		
+	}
+	
+     public void viewAllBooks() {
+    	 System.out.println("=========================================================================");
+    	 if(list.size()==0) {
+    		 System.out.println("No records found....");
+    	 }
+    	 else {
+           for(Book b : list) {
+    		 
+    		 System.out.println("ISBN no :"+b.getISBNno()+" "+"Book Name: "+b.getBookName()+" "+"Author Name: "+b.getAuthorName()+" "+"Language: " +b.getLanguage()+" "+"Book Price: "+b.getPrice()+" "+"Rating: "+b.getRatings());
+    		}
+    	 }
+    	 System.out.println("===========================================================================");
+      }
+     
+     public void addBooks() {
+    	 System.out.println("Enter Book ISBN no : ");
+    	 long ISBNno = sc.nextLong();
+ 		System.out.println("Enter Book Name: ");
+ 		sc.nextLine();
+ 		String BookName = sc.nextLine();
+ 		System.out.println("Enter Book Author Name: ");
+ 		String BookA = sc.nextLine();
+ 		System.out.println("Enter Book Language ");
+ 		String BookLanguage = sc.next();
+ 		System.out.println("Enter Book Price: ");
+ 	    int price = sc.nextInt();
+ 	    System.out.println("Enter Book Rating: ");
+	    float rating= sc.nextFloat();
+		
+	    Book b = new Book(ISBNno,BookName,BookA,BookLanguage,price,rating );
+   	    list.add(b);
+ 		
+    	 
+     }
+     
+     public void UpdateBookInfo() throws NumberFormatException, IOException {
+    	 
+    	 System.out.println("Enter the Book ISBNno : ");
+    		long Isbnno = sc.nextLong();
+    		
+    		int index =0;
+        	boolean found =false;
+        	Book b=null;
+        	for(Book book : list) {
+        		if(book.getISBNno()==Isbnno) {
+        			found = true;
+        			index = list.indexOf(book);
+        			b = book;
+        			break;
+        		}
+        	}
+        	if(found ==true) {
+        		
+        		System.out.println("Enter the book Name :");
+        		sc.nextLine();
+        		String BName =sc.nextLine();
+        		
+        		System.out.println("Enter the book Author Name :");
+        		String BAuthor =sc.nextLine();
+        		
+        		System.out.println("Enter the book Language :");
+        		String Language = sc.next();
+        		
+        		System.out.println("Enter the book price :");
+        		int Bprice = sc.nextInt();
+        		
+        		System.out.println("Enter the book Rating  :");
+        		float Brating = sc.nextFloat();
+        		
+        		
+        		b.setBookName(BName);
+        		b.setAuthorName(BAuthor);
+        		b.setLanguage(Language);
+        		b.setPrice(Bprice);
+        		b.setRatings(Brating);
+        		
+        		list.set(index, b);
+        		System.out.println("=========================================================");
+        		System.out.println("Book Information updated Sucessfully!!");
+        	}
+        	else {
+        		System.out.println("Book Name does note Exist!!");
+        	}
+        	System.out.println("=============================================================");
+        
+     }
+     
+     public void DeleteByISBNno() {
+    	System.out.println("Enter The Book ISBN which you want to delete the information ");
+    	long ISBNno = sc.nextLong();
+    	int index =0;
+    	int flag =0;
+    	Book b =null;
+    	for(Book book : list) {
+    		if(ISBNno ==book.getISBNno()) {
+    			flag =1;
+    			index = list.indexOf(book);
+    			b = book;
+    			System.out.println(index);
+    			break;
+    		  }
+    		}
+    		 System.out.println("=================================================");
+    		if(flag==0){
+    			System.out.println("Book is not exist !!");
+    		}
+    		else
+    		{
+    		list.remove(b);
+    		System.out.println("Book Data Deleted sucessfully !!");
+    	}
+    	
+     }
+     
+     public void viewBookInfoByName() {
+    	 boolean found = false;
+    		sc.nextLine();
+ 		System.out.println("Enter Book Name ");
+ 		
+ 		String bookName = sc.nextLine();
+ 		
+ 		System.out.println("-----------------------------------------------------------------");
+ 	  
+ 	   Iterator<Book> it = list.iterator();
+		while(it.hasNext()) {
+ 	    	Book b =it.next();
+ 	    	if(b.getBookName().equals(bookName)) {
+ 	    		System.out.println(b);
+ 	    		found =true;
+ 	    		
+ 	    	}
+ 	    }
+ 	    if(!found) {
+ 	    	System.out.println("Record Not Found ");
+ 	    	
+ 	    }
+ 	    System.out.println("==========================================================");
+ 	 
+ 	}
+ 	
+     
+     public void deleteAllBookData()
+ 	{
+ 		System.out.println("==================================================================================================");
+
+ 		if(list.size()>0)
+ 		{
+ 			list.clear();
+ 			System.out.println("All records deleted successfully!!");
+ 		}
+ 		else
+ 		{
+ 			System.out.println("No record available!!");
+ 		}
+ 		System.out.println("==================================================================================================");
+
+ 	}
+ 	
+	public static void main(String[] args) throws NumberFormatException, IOException{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("====================================================================");
+		System.out.println("=============   Online  Book Store    =============================");
+		System.out.println("====================================================================");
+		String ch=null;
+		BookMain b =new BookMain();
+		do
+		{
+		
+		System.out.println("\t\t 1) Insert Book Information \r\n"
+				+ "\t\t 2) View All Book Information \r\n"
+				+ "\t\t 3) view Book Information by BookName .\r\n"
+				+ "\t\t 4) Update Book information by ISBN   .\r\n"
+				+ "\t\t 5) delete Book information by ISBN   .\r\n"
+				+ "\t\t 6) delete all Book Information.");
+		System.out.println("====================================================================");
+		System.out.println("Enter your choice:");
+		int choice=sc.nextInt();
+	     sc.nextLine();
+		switch(choice)
+		{
+		case 1: b.addBooks();
+			    System.out.println("Book Information inserted sucessfully!!");
+			    break;			    
+		case 2:	b.viewAllBooks();
+				break;
+		case 3:	b.viewBookInfoByName();
+				break;
+		case 4:	b.UpdateBookInfo();
+				break;		
+		case 5: b.DeleteByISBNno();
+				break;
+		case 6:	b.deleteAllBookData();
+				break;		
+	    default:System.out.println("Wrong choice!!"); 		   
+		
+	   }
+		
+		System.out.println("Do you want to continue? (Y-Yes / N-No)");
+		ch=sc.next();
+		
+		}
+		while(ch.equals("Y")||ch.equals("y"));
+		System.out.println("====================================================================");
+
+		System.out.println("Bye....");
+	
+		System.out.println("====================================================================");
+
+	}
+
+
+}
+
+

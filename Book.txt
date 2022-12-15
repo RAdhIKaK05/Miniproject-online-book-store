@@ -1,0 +1,94 @@
+package miniproject;
+
+public class Book {
+	private long ISBNno;
+	private String bookName;
+	private String authorName;
+	private String language;
+	private int price;
+	private float ratings;
+	
+	
+	public Book() {
+		super();
+	}
+
+
+	public Book(long ISBNno ,String bookName, String authorName, String language, int price, float ratings) {
+		super();
+		this.ISBNno = ISBNno;
+		this.bookName = bookName;
+		this.authorName = authorName;
+		this.language = language;
+		this.price = price;
+		this.ratings = ratings;
+	}
+     
+	
+	public long getISBNno() {
+		return ISBNno;
+	}
+	public void setISBNno(long iSBNno) {
+		ISBNno = iSBNno;
+	}
+
+	
+	public String getBookName() {
+		return bookName;
+	}
+
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+
+	public String getLanguage() {
+		return language;
+	}
+
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+	public float getRatings() {
+		return ratings;
+	}
+
+
+	public void setRatings(float ratings) {
+		this.ratings = ratings;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Book [ISBNno=" + ISBNno + ",  bookName=" + bookName + ", authorName=" + authorName + ",  language="
+				+ language + " ,price=" + price + ", ratings=" + ratings + "]";
+	}
+
+
+	
+}
